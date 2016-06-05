@@ -23,5 +23,8 @@ define([
             this.listenTo(this.user, 'change', _.debounce(this.render, 5));
             this.listenTo(this.menu_class, 'change', _.debounce(this.render, 5));
         },
+        render: function () {
+            this.$el.html(this.template());
+        }
     });
 });

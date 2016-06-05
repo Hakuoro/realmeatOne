@@ -20,6 +20,9 @@ define([
 
             this.template = _.template(MenuTemplate);
 
+        },
+        render: function () {
+            this.$el.html(this.template());
         }
 
     });

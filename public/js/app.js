@@ -5,7 +5,7 @@ define([
     'backbone',
     'router', // Request router.js
     'libs/js.cookie'
-], function ($, _, Backbone, Router, Polyglot, Cookies) {
+], function ($, _, Backbone, Router, Cookies) {
 
     var app = {
 
@@ -23,6 +23,7 @@ define([
         },
 
         initialize: function () {
+            console.log('zxcvzcv');
             Router.initialize(this);
         }
 

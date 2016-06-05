@@ -25,14 +25,14 @@ define([
 
             BaseView.prototype.render.apply(this, arguments);
 
-            this.pageView.innerRender(this.$('.main-container'), this.app.lang);
-            this.pageView.delegateEvents();
+            this.pageView.innerRender(this.$('.main-container'));
+            //this.pageView.delegateEvents();
 
-            this.topMenuView.innerRender(this.$('.top-menu'), this.app.lang);
-            this.topMenuView.delegateEvents();
+            this.topMenuView.innerRender(this.$('.top-menu'));
+            //this.topMenuView.delegateEvents();
 
-            this.footerView.innerRender(this.$('.footer'), this.app.lang);
-            this.footerView.delegateEvents();
+            this.footerView.innerRender(this.$('.footer'));
+            //this.footerView.delegateEvents();
         },
 
         initialize: function(App) {
@@ -42,6 +42,7 @@ define([
 
             this.topMenuView = new MenuView(App);
             this.footerView = new FooterView(App);
+
 
         },
 
@@ -53,6 +54,7 @@ define([
                 if (this.pageView.model)
                     this.pageView.model.stopListening();
             }
+
 
             this.pageView = eval ('new ' + view +'(this.app)');
 

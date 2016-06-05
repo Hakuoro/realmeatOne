@@ -3,9 +3,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'socketClient',
     'components/container/ContainerView'
-], function ($, _, Backbone, SocketClient, ContainerView) {
+], function ($, _, Backbone, ContainerView) {
 
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -18,6 +17,8 @@ define([
     });
 
     var initialize = function (App) {
+
+        console.log("adsasd");
 
         var app_router = new AppRouter;
 

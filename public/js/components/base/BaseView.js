@@ -15,6 +15,11 @@ define([
             this.$el.html(this.template(this.model.attributes));
         },
         init:function(data){
+        },
+        innerRender: function(el){
+            this.$el = el;
+            this.delegateEvents();
+            this.render();
         }
     });
 });

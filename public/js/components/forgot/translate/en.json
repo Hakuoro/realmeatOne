@@ -1,8 +1,0 @@
-{ "forgot":
-{
-  "title": "Login",
-  "login": "Email",
-  "pass": "Password",
-  "button_caption": "Login"
-}
-}

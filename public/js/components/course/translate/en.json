@@ -1,9 +1,0 @@
-{ "course":
-{
-  "name": "Name",
-  "description": "Description",
-  "show": "Show",
-  "edit": "Edit",
-  "new": "Add course"
-}
-}
