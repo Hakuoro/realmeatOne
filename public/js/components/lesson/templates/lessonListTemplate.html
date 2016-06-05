@@ -1,0 +1,8 @@
+<% _.each(lessons, function(lesson, index) { %>
+    Название: <%-lesson.name%><br>
+    Описание: <%-lesson.shortDescription%><br/>
+    Расширенное Описание: <%-lesson.fullDescription%><br/>
+    Link: <%-lesson.videoLink%><br/>
+    <a href="#lesson/show/<%-lesson.euuid%>">Смотреть</a> | <a href="#lesson/edit/<%-lesson.euuid%>">Редактировать</a>
+    <hr>
+<%});%>

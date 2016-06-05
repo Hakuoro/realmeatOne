@@ -1,0 +1,8 @@
+{ "registration":
+  {
+    "title": "Registration",
+    "login": "Email",
+    "pass": "Password",
+    "button_caption": "Registration"
+  }
+}

@@ -1,0 +1,10 @@
+.buildpath
+.project
+.settings
+.idea
+.idea/www.icq.com (private).iml
+atlassian*
+.DS_Store
+_tmp_
+npm-debug.log
+public/images/content/courses*

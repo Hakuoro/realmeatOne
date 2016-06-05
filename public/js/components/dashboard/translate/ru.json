@@ -1,0 +1,7 @@
+{ "dashboard":
+{
+  "title": "Вход",
+  "login": "Email",
+  "name": "Имя"
+}
+}

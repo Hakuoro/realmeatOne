@@ -1,0 +1,33 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="t_reg_success_title"><%- app.poly.t('registration.title') %></div>
+            <div class="t_reg_success_text">VIP-мероприятие, отбрасывая подробности, транслирует имидж. Разработка медиаплана интегрирована. Имидж основательно подпорчен предыдущим опытом применения. Привлечение аудитории, анализируя результаты рекламной кампании, настроено позитивно. Пресс-клиппинг, согласно Ф.Котлеру, абстрактен.</div>
+            <div class="t_reg_form1">
+                <div><%- app.poly.t('registration.name') %></div>
+                <input id="name"  class="input_full_width" type="text">
+
+                <div><%- app.poly.t('registration.login') %></div>
+                <input id="login"  class="input_notfull_width" type="text">
+
+                <div><%- app.poly.t('registration.pass') %></div>
+                <input id="password" class="input_notfull_width error" type="text">
+                <span class="form_error"><%- error %></span>
+
+                <div><%- app.poly.t('registration.pass2') %></div>
+                <input id="password2" class="input_notfull_width" type="text">
+
+                <label class="control-label"> <%- error %> </label>
+
+                <div class="btn_blue">
+                    <a href="#reg" id="regButton"><%- app.poly.t('registration.button_caption') %></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,108 @@
+<div class="container-fluid header_box">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 header_box_left">
+            <a class="header_back" href="#course/show/<%- courseEuuid %>"><img src="images/header_back.png" alt=""> Назад</a>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 header_box_right">
+            ДОБАВИТЬ УРОК
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid content_container bg_fff">
+    <div class="row form_box">
+        <div class="col-lg-2 col-md-2 col-sm-2 form_number">
+
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-7 content_block">
+            <div class="t_form1">
+                <div>Название урока*</div>
+                <input class="input_notfull_width2 lesson-name" type="text" value="<%- name %>" name="name" >
+
+                <%if (imageUrl) { %>
+                <img src="<%-imageUrl%>"  width="100" height="100" class="lesson-image">
+
+                    <a href="#" class="imageChanger"><img src="images/edit_3.png" alt=""></a>
+                    <a href="#" class="imageDeleter"><img src="images/delete_2.png" alt=""></a>
+
+                <%} else { %>
+                <img src="" class="lesson-image">
+                <a class="add_ico" href="#">Загрузить иконку</a>
+                <%}%>
+                <input style="display:none;" type="file" name="lesson-image" id="lesson-image" class="inputfile lesson-image" data-file-class="lesson-image" />
+
+                <div>Краткое описание*</div>
+                <textarea class="add_les_textarea lesson-shortDescription" rows="5"  ><%- shortDescription %></textarea>
+                <span class="add_span_info">не более 250 символов</span>
+
+                <div>Развернутое описание курса*</div>
+                <textarea class="add_les_textarea lesson-fullDescription" rows="8" name="" id="" ><%- fullDescription %></textarea>
+
+                <div>Ссылка на видео (youtube или vimeo, slideshare)</div>
+                <input class="input_notfull_width2 lesson-videoLink" type="text" value="<%if (videoLink) {%>https://www.youtube.com/watch?v=<%-videoLink%><%}%>" >
+                <a class="add_vid" href="#">Добавить видео</a>
+                <span class="add_span_info2">Укажите прямую ссылку до вашего видео-урока</span><br/>
+                <% if (videoLink) {%>
+                <iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/<%-videoLink%>" frameborder="0"/>
+                <%} else {%>
+                <iframe style="display: none;" id="ytplayer" type="text/html" width="640" height="390" src="" frameborder="0"/>
+                <%}%>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 content_block_info">
+            Пояснения к разрешенному формату файла. Разработка медиаплана интегрирована. Имидж основательно подпорчен предыдущим опытом применения.
+        </div>
+    </div>
+
+    <div class="row form_box">
+        <div class="col-lg-2 col-md-2 col-sm-2 form_number">
+
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-7 content_block">
+            <div class="t_form1">
+                <div style="margin-top:80px;">Прикрепите файлы</div>
+                <div class="row" style="margin-top:0px;">
+                    <div class="col-sm-4">
+                        Файл<br>
+                        <input style="display:none;" type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+                        <label for="file-1"><img src="images/fil.png" alt=""> <span>Выберите файл&hellip;</span></label>
+                    </div>
+                    <div class="col-sm-6">
+                        Название<br>
+                        <input class="title_f" type="text">
+                    </div>
+                </div>
+                <div class="row" style="margin-top:0px;">
+                    <div class="col-sm-4">
+                        <input style="display:none;" type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+                        <label for="file-1"><img src="images/fil.png" alt=""> <span>Выберите файл&hellip;</span></label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="title_f" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 content_block_info">
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="bottom_line"></div>
+        <div class="row form_box">
+            <div class="col-lg-2 col-md-2 col-sm-2 form_number">
+
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 content_block">
+                <div class="less_notp"><%- result %></div>
+                <a class="add_l_b lesson-update" href="">Сохранить</a>
+                <!--a class="add_l_g" href="#">Сохранить</a-->
+                <br><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name="euuid" value="<%- euuid %>" class="lesson-itemUuid">
+<input type="hidden" name="courseEuuid" value="<%- courseEuuid %>" class="lesson-courseUuid">
