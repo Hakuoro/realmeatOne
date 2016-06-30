@@ -16,7 +16,7 @@ define([
     return BaseView.extend({
         pageView:'',
         footerView:'',
-        el: $("#page"),
+        el: $(".site"),
         views:{},
 
         template: _.template(ContainerTemplate),
@@ -25,13 +25,13 @@ define([
 
             BaseView.prototype.render.apply(this, arguments);
 
-            this.pageView.innerRender(this.$('.main-container'));
+            this.pageView.innerRender(this.$('.onlinestore'));
             //this.pageView.delegateEvents();
 
             this.topMenuView.innerRender(this.$('.top-menu'));
             //this.topMenuView.delegateEvents();
 
-            this.footerView.innerRender(this.$('.footer'));
+            this.footerView.innerRender(this.$('.copyrights'));
             //this.footerView.delegateEvents();
         },
 
