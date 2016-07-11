@@ -15,7 +15,8 @@ define([
             BaseView.prototype.initialize.apply(this, arguments);
 
             this.menuCollection = new MenuCollection();
-            this.menuCollection.init(App);
+            //this.menuCollection.init(App);
+            this.menuCollection.fetch();
 
             this.template = _.template(MenuTemplate);
 
@@ -24,7 +25,9 @@ define([
             this.listenTo(this.menu_class, 'change', _.debounce(this.render, 5));
         },
         render: function () {
-            this.$el.html(this.template());
+            this.$el.html(this.template({menuItems: this.menuCollection.models,_: _}));
         }
+
+
     });
 });

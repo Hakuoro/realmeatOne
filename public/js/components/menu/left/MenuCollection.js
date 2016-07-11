@@ -2,12 +2,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'components/menu/top/MenuItemModel'
+    'components/menu/left/MenuItemModel'
 ], function($, _, Backbone, MenuItemModel){
     return Backbone.Collection.extend({
         model: MenuItemModel,
-        lang:'',
-        init:function(App){
-        }
+        url:'/api/categories'
     });
 });

@@ -1,5 +1,22 @@
     <ul>
-        <li class="active"><a href="store-inside.html">Колбасы и деликатесы</a>
+
+        <% _.each(menuItems, function(item){ %>
+        <li ><a href="#category/<%- item.get('url') %>"><%- item.get('title') %></a>
+
+            <% if (item.get('sibling'))  {%>
+            <ul style="margin-left:30px; font-size:0.750em;padding:5px 0 30px 0;list-style-type: circle;">
+                <% _.each(item.get('sibling'), function(sibling){ %>
+                <li><a href="#category/<%- sibling.url %>" class="sub"><%- sibling.title %></a></li>
+                <% }); %>
+            </ul>
+
+            <%}%>
+
+        <% }); %>
+
+
+
+        <!--li class="active"><a href="store-inside.html">Колбасы и деликатесы</a>
             <ul style="margin-left:30px; font-size:0.750em;padding:5px 0 30px 0;list-style-type: circle;">
                 <li><a href="store-inside.html" class="sub">Вареные колбасы</a></li>
                 <li><a href="store-inside.html" class="sub">Сосиски</a></li>
@@ -18,5 +35,5 @@
         <li><a href="store-inside.html">Замороженные полуфабрикаты</a></li>
         <li><a href="store-inside.html">Соусы</a></li>
         <li><a href="store-inside.html">Оливки/Маслины</a></li>
-        <li><a href="store-inside.html">Кафе</a></li>
+        <li><a href="store-inside.html">Кафе</a></li-->
     </ul>

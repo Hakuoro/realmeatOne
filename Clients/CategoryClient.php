@@ -11,15 +11,20 @@ namespace Clients;
 use Api\ApiClient;
 use Api\ApiException;
 use Interop\Container\ContainerInterface;
+use Slim\Http\Response;
 
 class CategoryClient {
 	protected $ci;
 	//Constructor
 	public function __construct(ContainerInterface $ci) {
 		$this->ci = $ci;
+
+		/** @var \Slim\Views\Twig view */
+		$this->view = $this->ci->view;
+
 	}
 
-	public function getCategories($request, $response, $args) {
+	public function getCategories($id) {
 
 		//http://rm.backend.smart-startup.ru/api/categories/
 
@@ -28,7 +33,7 @@ class CategoryClient {
 
 		try {
 
-			list($response, $statusCode, $httpHeader) = $apiClient->callApi(
+			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
 				'/categories/',
 				'GET',
 				[],
@@ -40,8 +45,8 @@ class CategoryClient {
 				'application/json'
 			);
 
-			if (!$response) {
-				return array(null, $statusCode, $httpHeader);
+			if (!$res) {
+				throw  new \Exception('Cannot get categories', 500);
 			}
 
 		} catch (ApiException $e) {
@@ -49,11 +54,11 @@ class CategoryClient {
 			exit;
 		}
 
-
-		print_r($response); exit;
-
+		return $res->categories;
 
 	}
+
+
 
 	public function method2($request, $response, $args) {
 		//your code

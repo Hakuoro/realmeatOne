@@ -16,6 +16,7 @@ define([
     return BaseView.extend({
         pageView:'',
         footerView:'',
+        showCarusel:true,
         el: $(".site"),
         views:{},
 
@@ -23,7 +24,8 @@ define([
 
         render: function() {
 
-            BaseView.prototype.render.apply(this, arguments);
+            //BaseView.prototype.render.apply(this, arguments);
+            this.$el.html(this.template({showCarusel:this.showCarusel}));
 
             this.pageView.innerRender(this.$('.onlinestore'));
             //this.pageView.delegateEvents();
