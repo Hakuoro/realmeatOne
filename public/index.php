@@ -41,12 +41,20 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 $app->get('/categories/{id}', function (Request $request, Response $response, $args) {
-
 	return $this->view->render($response, 'index.html', [
 		'categories' => (new \Clients\CategoryClient($this))->getCategories(''),
 		'products' => (new \Clients\ProductClient($this))->getProducts($args['id'])
 	]);
 });
+
+$app->get('/product/{id}', function (Request $request, Response $response, $args) {
+	return $this->view->render($response, 'product.html', [
+		'categories' => (new \Clients\CategoryClient($this))->getCategories(''),
+		'product' => (new \Clients\ProductClient($this))->getProduct($args['id'])
+	]);
+});
+
+
 
 
 //$app->get('/api/categories', '\Clients\CategoryClient:getCategories');

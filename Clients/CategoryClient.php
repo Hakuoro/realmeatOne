@@ -24,7 +24,7 @@ class CategoryClient {
 
 	}
 
-	public function getCategories($id) {
+	public function getCategories() {
 
 		//http://rm.backend.smart-startup.ru/api/categories/
 
@@ -59,14 +59,37 @@ class CategoryClient {
 	}
 
 
+	public function getCategory($id) {
 
-	public function method2($request, $response, $args) {
-		//your code
-		//to access items in the container... $this->ci->get('');
-	}
+		//http://rm.backend.smart-startup.ru/api/categories/
 
-	public function method3($request, $response, $args) {
-		//your code
-		//to access items in the container... $this->ci->get('');
+		$apiClient = new ApiClient();
+		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
+
+		try {
+
+			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
+				'/categories/',
+				'GET',
+				[],
+				'',
+				[
+					'Accept' => 'application/json',
+					'Accept-Encoding' => 'gzip',
+				],
+				'application/json'
+			);
+
+			if (!$res) {
+				throw  new \Exception('Cannot get categories', 500);
+			}
+
+		} catch (ApiException $e) {
+			echo 'Error';
+			exit;
+		}
+
+		return $res->categories;
+
 	}
 }

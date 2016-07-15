@@ -97,11 +97,8 @@
 
 </div>
 
-
-
 <div id="online-store" style="position:relative;top:-95px;"></div>
-
-<div class="onlinestore" id="onlinestore" style="">
+<div class="onlinestore" id="onlinestore" style="margin-top:60px;">
 
     <div class="online-store2"></div>
     <!--<div style="width:100%;text-align:left;"><h2>Онлайн-магазин гастрономического бутика «Настоящий мясной»</h2></div>-->
@@ -110,11 +107,11 @@
         <ul>
 
             {% for category in categories %}
-            <li ><a href="/categories/{{ category.id }}">{{ category.title|e }}</a>
+            <li ><a href="/categories/{{ category.url }}">{{ category.title|e }}</a>
                 {% if category.sibling|length > 0 %}
                 <ul style="margin-left:30px; font-size:0.750em;padding:5px 0 30px 0;list-style-type: circle;">
                     {% for item in category.sibling %}
-                    <li><a href="/categories/{{ item.id }}" class="sub">{{ item.title|e }}</a></li>
+                    <li><a href="/categories/{{ item.url }}" class="sub">{{ item.title|e }}</a></li>
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -135,10 +132,10 @@
 
             <li>
                 <figure>
-                    <a href="/categories/{{product.categoryId}}" style="display:inline-block;width:100%;font-size:0.75em;text-decoration:none;color:#000;">{{product.categoryName|e}}</a><br/>
-                    <a href="/products/{{product.id}}"></img src="{{product.image}}" title="{{product.title|e}}"></a>
+                    <a href="/categories/{{product.categoryCode}}" style="display:inline-block;width:100%;font-size:0.75em;text-decoration:none;color:#000;">{{product.categoryName|e}}</a><br/>
+                    <a href="/product/{{product.url}}"><img src="{{product.image}}" title="{{product.title|e}}"></a>
                     <figcaption>
-                        <h2><a href="/products/{{product.id}}">{{product.title|e}}"</a> </h2>
+                        <h2><a href="/product/{{product.id}}">{{product.title|e}}"</a> </h2>
                     </figcaption>
                     <div class="pricebtn">
                         <div class="price">{{product.price|e}}" р./кг.</div>

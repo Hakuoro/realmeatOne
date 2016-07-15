@@ -35,11 +35,10 @@ class ProductClient {
 		$params = [];
 
 		if ($catId){
-			$params['categoryId'] = (int)$catId;
+			$params['categoryCode'] = $catId;
 		}
 
 		try {
-
 			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
 				'/products/',
 				'GET',
@@ -62,6 +61,45 @@ class ProductClient {
 		}
 
 		return $res->products;
+
+	}
+
+	public function getProduct($productId) {
+
+		//http://rm.backend.smart-startup.ru/api/products/
+
+		$apiClient = new ApiClient();
+		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
+
+
+		$params['productCode'] = $productId;
+
+		try {
+
+			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
+				'/product/',
+				'GET',
+				$params,
+				'',
+				[
+					'Accept' => 'application/json',
+					'Accept-Encoding' => 'gzip',
+				],
+				'application/json'
+			);
+
+			if (!$res) {
+				throw  new \Exception('Cannot get products', 500);
+			}
+
+		} catch (ApiException $e) {
+			echo 'Error';
+			exit;
+		}
+
+		//print_r($res); exit;
+
+		return $res;
 
 	}
 }
