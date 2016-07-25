@@ -24,34 +24,30 @@ $container['view'] = function ($container) {
 	return $view;
 };
 
-
-$app->get('/hello/{name}', function (Request $request, Response $response) {
-	$name = $request->getAttribute('name');
-	$response->getBody()->write("Hello, $name");
-
-	return $response;
-});
+$container['cookie'] = function($container){
+	$request = $container->get('request');
+	return new \Slim\Http\Cookies($request->getCookieParams());
+};
 
 $app->get('/', function (Request $request, Response $response) {
-
 	return $this->view->render($response, 'index.html', [
-		'categories' => (new \Clients\CategoryClient($this))->getCategories(''),
+		'categories' => (new \Clients\CategoryClient($this))->getCategories(),
 		'products' => (new \Clients\ProductClient($this))->getProducts('')
-	]);
+	])->withHeader('Set-Cookie', $this->cookie->toHeaders());
 });
 
 $app->get('/categories/{id}', function (Request $request, Response $response, $args) {
 	return $this->view->render($response, 'index.html', [
-		'categories' => (new \Clients\CategoryClient($this))->getCategories(''),
+		'categories' => (new \Clients\CategoryClient($this))->getCategories(),
 		'products' => (new \Clients\ProductClient($this))->getProducts($args['id'])
-	]);
+	])->withHeader('Set-Cookie', $this->cookie->toHeaders());
 });
 
 $app->get('/product/{id}', function (Request $request, Response $response, $args) {
 	return $this->view->render($response, 'product.html', [
-		'categories' => (new \Clients\CategoryClient($this))->getCategories(''),
+		'categories' => (new \Clients\CategoryClient($this))->getCategories(),
 		'product' => (new \Clients\ProductClient($this))->getProduct($args['id'])
-	]);
+	])->withHeader('Set-Cookie', $this->cookie->toHeaders());
 });
 
 

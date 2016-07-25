@@ -10,20 +10,8 @@ namespace Clients;
 
 use Api\ApiClient;
 use Api\ApiException;
-use Interop\Container\ContainerInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
 
-class ProductClient {
-	protected $ci;
-	//Constructor
-	public function __construct(ContainerInterface $ci) {
-		$this->ci = $ci;
-
-		/** @var \Slim\Views\Twig view */
-		$this->view = $this->ci->view;
-
-	}
+class ProductClient extends BaseClient{
 
 	public function getProducts($catId = null) {
 
@@ -32,17 +20,16 @@ class ProductClient {
 		$apiClient = new ApiClient();
 		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
 
-		$params = [];
 
 		if ($catId){
-			$params['categoryCode'] = $catId;
+			$this->params['categoryCode'] = $catId;
 		}
 
 		try {
 			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
 				'/products/',
 				'GET',
-				$params,
+				$this->params,
 				'',
 				[
 					'Accept' => 'application/json',
@@ -60,8 +47,7 @@ class ProductClient {
 			exit;
 		}
 
-		return $res->products;
-
+		return $this->processResponse($res, 'products');
 	}
 
 	public function getProduct($productId) {
@@ -72,14 +58,14 @@ class ProductClient {
 		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
 
 
-		$params['productCode'] = $productId;
+		$this->params['productCode'] = $productId;
 
 		try {
 
 			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
 				'/product/',
 				'GET',
-				$params,
+				$this->params,
 				'',
 				[
 					'Accept' => 'application/json',
@@ -97,9 +83,8 @@ class ProductClient {
 			exit;
 		}
 
-		//print_r($res); exit;
+		print_r($res); exit;
 
-		return $res;
-
+		return $this->processResponse($res, 'product');
 	}
 }
