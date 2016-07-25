@@ -9,6 +9,7 @@
 namespace Clients;
 
 
+use Api\ApiClient;
 use Interop\Container\ContainerInterface;
 
 class BaseClient
@@ -37,6 +38,11 @@ class BaseClient
 
 	protected $params = [];
 
+	/**
+	 * @var null ApiClient
+	 */
+	protected $apiClient = null;
+
 	//Constructor
 	public function __construct(ContainerInterface $ci) {
 		$this->ci = $ci;
@@ -47,10 +53,13 @@ class BaseClient
 
 		$this->session = $this->cookies->get(self::SESSION_NAME, '');
 
-
 		if ($this->session){
 			$this->params[self::SESSION_NAME] = $this->session;
 		}
+
+		$this->apiClient = $this->ci->apiClient;
+
+		$this->apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
 	}
 
 
@@ -67,5 +76,20 @@ class BaseClient
 		 }
 
 		return $response->{$section};
+	}
+
+	protected function callApi($url){
+
+		return $this->apiClient->callApi(
+			$url,
+			'GET',
+			$this->params,
+			'',
+			[
+				'Accept' => 'application/json',
+				'Accept-Encoding' => 'gzip',
+			],
+			'application/json'
+		);
 	}
 }

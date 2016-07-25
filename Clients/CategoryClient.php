@@ -17,23 +17,9 @@ class CategoryClient extends BaseClient{
 	public function getCategories() {
 
 		//http://rm.backend.smart-startup.ru/api/categories/
-
-		$apiClient = new ApiClient();
-		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
-
 		try {
 
-			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
-				'/categories/',
-				'GET',
-				$this->params,
-				'',
-				[
-					'Accept' => 'application/json',
-					'Accept-Encoding' => 'gzip',
-				],
-				'application/json'
-			);
+			list($res, $statusCode, $httpHeader) = $this->callApi('/categories/');
 
 			if (!$res) {
 				throw  new \Exception('Cannot get categories', 500);
@@ -54,22 +40,9 @@ class CategoryClient extends BaseClient{
 
 		//http://rm.backend.smart-startup.ru/api/categories/
 
-		$apiClient = new ApiClient();
-		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
-
 		try {
 
-			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
-				'/categories/',
-				'GET',
-				$this->params,
-				'',
-				[
-					'Accept' => 'application/json',
-					'Accept-Encoding' => 'gzip',
-				],
-				'application/json'
-			);
+			list($res, $statusCode, $httpHeader) = $this->callApi('/categories/');
 
 			if (!$res) {
 				throw  new \Exception('Cannot get categories', 500);

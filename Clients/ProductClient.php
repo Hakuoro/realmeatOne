@@ -17,26 +17,13 @@ class ProductClient extends BaseClient{
 
 		//http://rm.backend.smart-startup.ru/api/products/
 
-		$apiClient = new ApiClient();
-		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
-
-
 		if ($catId){
 			$this->params['categoryCode'] = $catId;
 		}
 
 		try {
-			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
-				'/products/',
-				'GET',
-				$this->params,
-				'',
-				[
-					'Accept' => 'application/json',
-					'Accept-Encoding' => 'gzip',
-				],
-				'application/json'
-			);
+
+			list($res, $statusCode, $httpHeader) = $this->callApi('/products/');
 
 			if (!$res) {
 				throw  new \Exception('Cannot get products', 500);
@@ -54,25 +41,11 @@ class ProductClient extends BaseClient{
 
 		//http://rm.backend.smart-startup.ru/api/products/
 
-		$apiClient = new ApiClient();
-		$apiClient->getConfig()->setHost('http://rm.backend.smart-startup.ru/api');
-
-
 		$this->params['productCode'] = $productId;
 
 		try {
 
-			list($res, $statusCode, $httpHeader) = $apiClient->callApi(
-				'/product/',
-				'GET',
-				$this->params,
-				'',
-				[
-					'Accept' => 'application/json',
-					'Accept-Encoding' => 'gzip',
-				],
-				'application/json'
-			);
+			list($res, $statusCode, $httpHeader) = $this->callApi('/product/');
 
 			if (!$res) {
 				throw  new \Exception('Cannot get products', 500);
@@ -83,8 +56,24 @@ class ProductClient extends BaseClient{
 			exit;
 		}
 
-		print_r($res); exit;
+		$product = $this->processResponse($res, 'product');
 
-		return $this->processResponse($res, 'product');
+		 if (isset($product->weightOrder)){
+
+			 $slices = explode(';', $product->weightOrder);
+
+			 foreach ($slices as $weight){
+
+				 if ($weight) {
+					 $product->slices[] = [
+						 'weight' => $weight,
+						 'price' => round($product->price * $weight, 2)
+					 ];
+				 }
+			 }
+
+		 }
+
+		return $product;
 	}
 }

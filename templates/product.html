@@ -49,20 +49,23 @@
                         <br/>
                         <p class="itemdata"> Вес единицы: {{product.weight}} {{product.units}}. <br/><br/><br/>
 
+                            {% for slice in product.slices %}
                             <input type="radio" class="radio" id="radio1" name="radio">
-                            <label for="radio1"><span>Купить 0.7 кг за 248.5 рублей</span></label>
+                            <label for="radio1"><span>Купить {{slice.weight|e}} кг за {{slice.price|e}} рублей</span></label>
                             <br/><br/>
-
-                            <input type="radio" class="radio" id="radio2" name="radio">
-                            <label for="radio2"><span>Купить 1.4 кг за 497 рублей</span></label>
-                            <br/><br/>
+                            {% endfor %}
 
 
+                            {% if product.isSliced == "Y" %}
                             <input type="checkbox" class="checkbox" id="checkbox"/>
                             <label for="checkbox"><span>Нарезка</span></label>
+                            {% endif %}
 
+                            {% if product.isSliced == "T" %}
                             <input type="checkbox" class="checkbox" id="checkbox2"/>
                             <label for="checkbox2"><span>Сделать фарш</span></label>
+                            {% endif %}
+
 
                         </p>
 
@@ -71,7 +74,7 @@
                         <div class="number">
                             <div style="width:auto;display:inline-block;overflow:hidden;text-align:center;">
                                 <div class="minus">-</div>
-                                <div class="c_items">2</div>
+                                <div class="c_items">1</div>
                                 <div class="plus">+</div>
                             </div>
                         </div>

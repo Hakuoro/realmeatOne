@@ -29,10 +29,15 @@ $container['cookie'] = function($container){
 	return new \Slim\Http\Cookies($request->getCookieParams());
 };
 
+$container['apiClient'] = function($container){
+	return new \Api\ApiClient();
+};
+
 $app->get('/', function (Request $request, Response $response) {
 	return $this->view->render($response, 'index.html', [
 		'categories' => (new \Clients\CategoryClient($this))->getCategories(),
-		'products' => (new \Clients\ProductClient($this))->getProducts('')
+		'products' => (new \Clients\ProductClient($this))->getProducts(''),
+		'basket' => (new \Clients\CartClient($this))->getCart()
 	])->withHeader('Set-Cookie', $this->cookie->toHeaders());
 });
 
@@ -50,11 +55,9 @@ $app->get('/product/{id}', function (Request $request, Response $response, $args
 	])->withHeader('Set-Cookie', $this->cookie->toHeaders());
 });
 
-
-
-
-//$app->get('/api/categories', '\Clients\CategoryClient:getCategories');
-$app->get('/categories', '\Clients\CategoryClient:getCategories');
-
+$app->get('/addCart/{id}/{weight}/{amount}', function (Request $request, Response $response, $args) {
+	$data = (new \Clients\CartClient($this))->addProduct($args['id'], $args['weight'], $args['amount']);
+	return $response->withJson($data);
+});
 
 $app->run();
